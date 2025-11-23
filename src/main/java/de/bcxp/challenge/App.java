@@ -1,23 +1,43 @@
 package de.bcxp.challenge;
 
+import de.bcxp.challenge.countries.CountryService;
+import de.bcxp.challenge.util.CsvTableReader;
+import de.bcxp.challenge.weather.WeatherService;
+
 /**
- * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
- * design. Read: create your own classes and packages as appropriate.
+ * The entry class for your solution. This class stays minimal and only wires up
+ * the components you created in your clean architecture.
  */
 public final class App {
 
+    private static final String WEATHER_CSV = "/de/bcxp/challenge/weather.csv";
+    private static final String COUNTRIES_CSV = "/de/bcxp/challenge/countries.csv";
+
     /**
-     * This is the main entry method of your program.
-     * @param args The CLI arguments passed
+     * Main entry method.
+     *
+     * @param args CLI arguments
      */
     public static void main(String... args) {
 
-        // Your preparation code …
+        // --- Infrastructure setup ---
+        CsvTableReader weatherCsvReader = new CsvTableReader(',');
+        CsvTableReader countryCsvReader = new CsvTableReader(';');
 
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
+
+        // --- Application services ---
+        WeatherService weatherService = new WeatherService(weatherCsvReader, WEATHER_CSV);
+        CountryService countryService = new CountryService(countryCsvReader, COUNTRIES_CSV);
+
+        // --- Your analysis calls ---
+        String dayWithSmallestTempSpread =
+                String.valueOf(weatherService.findDayWithSmallestTemperatureSpread());
+
+        String countryWithHighestPopulationDensity =
+                 countryService.findCountryWithHighestPopulationDensity();
+
+        // --- Output ---
         System.out.printf("Day with smallest temperature spread: %s%n", dayWithSmallestTempSpread);
-
-        String countryWithHighestPopulationDensity = "Some country"; // Your population density analysis function call …
         System.out.printf("Country with highest population density: %s%n", countryWithHighestPopulationDensity);
     }
 }
