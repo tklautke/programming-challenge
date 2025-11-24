@@ -4,7 +4,6 @@ import lombok.Value;
 
 /**
  * Domain object representing a country with its population and land area.
- * Immutable, concise, and focused purely on domain data and logic.
  */
 @Value
 public class Country {

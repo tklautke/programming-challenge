@@ -35,17 +35,24 @@
     </properties>
 
     <dependencies>
+        <!-- For Unit Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.8.0-M1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Used because it is a mature and widely adopted library for CSV parsing,
+        eliminating the need to implement our own CSV reader -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
-            <version>1.11.0</version>
+            <version>1.14.1</version>
         </dependency>
+
+        <!-- Used to reduce boilerplate code for domain objects
+        (e.g. getters, constructors). Only needed during compilation. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -4,7 +4,6 @@ import lombok.Value;
 
 /**
  * Domain object representing a single day of weather data.
- * Immutable, clearly defined, and free of technical dependencies.
  */
 @Value
 public class Weather {
